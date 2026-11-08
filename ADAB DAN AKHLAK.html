@@ -1,0 +1,454 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IslamiCore - Adab dan Akhlak</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+	/* ==============================
+   GAMBAR ILUSTRASI ADAB
+============================== */
+
+.gambar-adab {
+    max-width: 950px;
+    margin: 0 auto 45px;
+    padding: 0 30px;
+}
+
+.gambar-adab img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+
+    border-radius: 20px;
+    border: 1px solid rgba(0, 242, 255, 0.25);
+
+    box-shadow: 0 0 25px rgba(0, 242, 255, 0.06);
+}
+
+@media (max-width: 700px) {
+    .gambar-adab {
+        padding: 0 18px;
+        margin-bottom: 30px;
+    }
+
+    .gambar-adab img {
+        height: 230px;
+    }
+}
+        /* ==============================
+           1. PENGATURAN DASAR
+        ============================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --neon-blue: #00f2ff;
+            --deep-space: #05060a;
+            --glass: rgba(255, 255, 255, 0.025);
+            --border: rgba(255, 255, 255, 0.12);
+            --text-gray: #aeb8bd;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background:
+                radial-gradient(circle at 50% 0%, rgba(0, 242, 255, 0.12), transparent 35%),
+                var(--deep-space);
+            color: white;
+            line-height: 1.8;
+        }
+
+
+        /* ==============================
+           2. NAVBAR
+        ============================== */
+
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            width: 100%;
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(5, 6, 10, 0.75);
+            backdrop-filter: blur(18px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            color: white;
+        }
+
+        .logo span {
+            color: var(--neon-blue);
+            text-shadow: 0 0 15px var(--neon-blue);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 35px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #b8c4c8;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--neon-blue);
+        }
+
+        .nav-links .active {
+            color: white;
+            border-bottom: 2px solid var(--neon-blue);
+            padding-bottom: 8px;
+        }
+
+        .system-status {
+            color: var(--neon-blue);
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+
+
+        /* ==============================
+           3. HERO SECTION
+        ============================== */
+
+        .hero {
+            min-height: 420px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 80px 20px;
+        }
+
+        .hero h1 {
+            max-width: 900px;
+            font-size: clamp(35px, 6vw, 65px);
+            font-weight: 800;
+            line-height: 1.2;
+            background: linear-gradient(
+                90deg,
+                #ffffff,
+                var(--neon-blue)
+            );
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            color: var(--text-gray);
+            font-size: 15px;
+            letter-spacing: 1px;
+        }
+
+
+        /* ==============================
+           4. AREA MATERI
+        ============================== */
+
+        .materi {
+            max-width: 950px;
+            margin: 0 auto;
+            padding: 0 30px 60px;
+        }
+
+        .materi-card {
+            background: var(--glass);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 35px;
+        }
+
+        .materi-card h2 {
+            color: white;
+            font-size: 25px;
+            margin-bottom: 20px;
+        }
+
+        .materi-card h2 span {
+            color: var(--neon-blue);
+        }
+
+        .materi-card p {
+            color: var(--text-gray);
+            font-size: 15px;
+            line-height: 2;
+            text-align: justify;
+            margin-bottom: 15px;
+        }
+
+
+        /* ==============================
+           5. KOTAK DALIL
+        ============================== */
+
+        .dalil-box {
+            background: rgba(0, 242, 255, 0.035);
+            border: 1px solid rgba(0, 242, 255, 0.25);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            margin: 25px 0;
+        }
+
+        .dalil-box .arab {
+            font-size: 28px;
+            line-height: 2;
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .dalil-box .arti {
+            color: #c7d0d3;
+            font-style: italic;
+            font-weight: 600;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .dalil-box .sumber {
+            color: var(--text-gray);
+            font-weight: 600;
+            text-align: center;
+        }
+
+
+      
+
+
+        /* ==============================
+           7. FOOTER
+        ============================== */
+
+        footer {
+            text-align: center;
+            padding: 30px 20px;
+            color: #69777c;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            border-top: 1px solid var(--border);
+            margin-top: 50px;
+        }
+
+
+        /* ==============================
+           8. RESPONSIVE
+        ============================== */
+
+        @media (max-width: 700px) {
+            nav {
+                padding: 15px 20px;
+            }
+
+            .logo {
+                font-size: 19px;
+            }
+
+            .nav-links {
+                gap: 15px;
+            }
+
+            .nav-links a {
+                font-size: 10px;
+            }
+
+            .system-status {
+                display: none;
+            }
+
+            .hero {
+                min-height: 330px;
+            }
+
+            .materi {
+                padding: 0 18px 40px;
+            }
+
+            .materi-card {
+                padding: 25px;
+            }
+
+            .materi-card h2 {
+                font-size: 21px;
+            }
+
+            .adab-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .adab-card {
+                padding: 25px;
+            }
+
+            .section-heading h2 {
+                font-size: 23px;
+            }
+
+            .dalil-box .arab {
+                font-size: 23px;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+    <!-- ==============================
+         9. NAVBAR
+    ============================== -->
+
+    <nav>
+        <div class="logo">
+            ISLAMI<span>CORE</span>
+        </div>
+
+        <ul class="nav-links">
+            <li>
+                <a href="index.html" class="active">BERANDA</a>
+            </li>
+        </ul>
+
+        <div class="system-status">
+            SYSTEM ACTIVE
+        </div>
+    </nav>
+
+
+    <!-- ==============================
+         10. HERO SECTION
+    ============================== -->
+
+    <header class="hero">
+        <h1>ADAB LEBIH TINGGI DARI ILMU</h1>
+        <p>Eksplorasi Kebijaksanaan dalam Digitalisasi</p>
+    </header>
+	<!-- GAMBAR ILUSTRASI ADAB -->
+
+<section class="gambar-adab">
+    <img
+        src="content_shutterstock_1401287783.jpg"
+        alt="Ilustrasi adab kepada orang tua"
+    >
+</section>
+
+    <!-- ==============================
+         11. SELURUH MATERI
+    ============================== -->
+
+    <main class="materi">
+
+        <!-- PENGERTIAN ADAB -->
+
+        <section class="materi-card">
+            <h2>
+                <span>01.</span> Pengertian Adab
+            </h2>
+
+            <p>
+                Adab dan akhlak adalah dua hal yang saling berkaitan
+                dalam ajaran Islam dan menjadi pedoman bagi manusia
+                untuk berperilaku baik dalam kehidupan sehari-hari.
+                Adab adalah tata krama, sopan santun, dan aturan
+                berperilaku sesuai dengan ajaran Islam.
+            </p>
+
+            <p>
+                Adab mengajarkan manusia untuk menempatkan sesuatu
+                pada tempatnya, menghormati orang lain, serta menjaga
+                perilaku dalam setiap keadaan. Dengan menerapkan adab,
+                seseorang dapat membangun hubungan yang baik dengan
+                Allah SWT, sesama manusia, dan lingkungan sekitarnya.
+            </p>
+        </section>
+
+
+        <!-- DALIL ADAB -->
+
+        <section class="materi-card">
+            <h2>
+                <span>02.</span> Dalil tentang Adab
+            </h2>
+
+            <p>
+                Salah satu dalil yang menjelaskan tentang kemuliaan
+                akhlak terdapat dalam Al-Qur'an Surah Al-Qalam ayat 4.
+            </p>
+
+            <div class="dalil-box">
+
+                <p class="arab" dir="rtl">
+                    وَإِنَّكَ لَعَلَىٰ خُلُقٍ عَظِيمٍ
+                </p>
+
+                <p class="arti">
+                    Artinya: "Dan sesungguhnya engkau benar-benar
+                    berbudi pekerti yang luhur."
+                </p>
+
+                <p class="sumber">
+                    (QS. Al-Qalam: 4)
+                </p>
+
+            </div>
+
+            <p>
+                Ayat ini menjelaskan bahwa Nabi Muhammad saw.
+                memiliki akhlak yang mulia dan menjadi teladan
+                bagi umat Islam dalam berperilaku.
+            </p>
+        </section>
+
+
+     
+        <!-- BATAS AKHIR SELURUH MATERI -->
+
+    </main>
+
+
+    <!-- ==============================
+         13. FOOTER
+    ============================== -->
+
+    <footer>
+        ISLAMIC VALUES IN DIGITAL GENERATION
+    </footer>
+
+
+</body>
+</html>
