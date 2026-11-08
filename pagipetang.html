@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IslamiCore - Futuristik Nav</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+	
+	  /* Reset & Base Styling */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        :root {
+            --neon-blue: #00f2ff;
+            --deep-space: #05060a;
+            --glass: rgba(255, 255, 255, 0.03);
+            --border-glass: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            background-color: var(--deep-space);
+            color: white;
+            min-height: 100vh;
+            overflow-x: hidden;
+            /* Background efek luar angkasa sederhana */
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(0, 242, 255, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(0, 242, 255, 0.05) 0%, transparent 40%);
+        }
+
+        /* Navbar Container */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 6%;
+            height: 80px;
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-glass);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        /* Logo Area */
+        .logo {
+            font-weight: 800;
+            font-size: 1.6rem;
+            letter-spacing: 3px;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+
+        .logo span {
+            color: var(--neon-blue);
+            text-shadow: 0 0 15px var(--neon-blue);
+        }
+
+        /* Nav Links */
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 3rem;
+            height: 100%;
+            align-items: center;
+        }
+
+        .nav-item {
+            position: relative;
+            height: 100%;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.4s ease;
+        }
+
+        /* Hover Effect Line */
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 25px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--neon-blue);
+            box-shadow: 0 0 10px var(--neon-blue);
+            transition: width 0.4s ease;
+        }
+
+        .nav-links a:hover::after, 
+        .nav-item.active a::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: var(--neon-blue);
+        }
+
+        /* Dropdown Styling */
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%) translateY(20px);
+            background: rgba(10, 11, 16, 0.95);
+            border: 1px solid var(--border-glass);
+            min-width: 220px;
+            padding: 1rem 0;
+            list-style: none;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .dropdown-menu::before {
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--neon-blue), transparent);
+        }
+
+        .nav-item:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .dropdown-menu li a {
+            padding: 0.7rem 1.5rem;
+            display: block;
+            text-transform: none;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
+            transition: 0.3s;
+        }
+
+        .dropdown-menu li a::after { display: none; } /* Hilangkan garis bawah di dropdown */
+
+        .dropdown-menu li a:hover {
+            background: rgba(0, 242, 255, 0.1);
+            color: var(--neon-blue);
+            padding-left: 1.8rem;
+        }
+
+        /* Content Placeholder */
+        .hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: calc(100vh - 80px);
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, #fff, var(--neon-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+     /* DZIKIR PAGI & PETANG */
+.dzikir-container {
+    width: 90%;
+    max-width: 1100px;
+    margin: 50px auto;
+    color: #eafaff;
+}
+
+.dzikir-header {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.dzikir-header h2 {
+    font-size: 2rem;
+    color: var(--neon-blue);
+    margin-bottom: 10px;
+    text-shadow: 0 0 15px rgba(0, 242, 255, 0.35);
+}
+
+.dzikir-header p {
+    color: #aabac5;
+    line-height: 1.7;
+}
+
+.dzikir-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+}
+
+.dzikir-tab {
+    padding: 12px 28px;
+    border: 1px solid rgba(0, 242, 255, 0.4);
+    border-radius: 12px;
+    background: rgba(0, 242, 255, 0.06);
+    color: #eafaff;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.dzikir-tab:hover {
+    background: var(--neon-blue);
+    color: #05060a;
+    box-shadow: 0 0 18px rgba(0, 242, 255, 0.4);
+}
+
+.dzikir-section {
+    margin-bottom: 55px;
+    scroll-margin-top: 100px;
+}
+
+.dzikir-section-title {
+    color: var(--neon-blue);
+    font-size: 1.6rem;
+    margin-bottom: 8px;
+}
+
+.dzikir-section-desc {
+    color: #aabac5;
+    margin-bottom: 25px;
+    line-height: 1.7;
+}
+
+.dzikir-card {
+    background: rgba(255, 255, 255, 0.045);
+    border: 1px solid rgba(0, 242, 255, 0.18);
+    border-radius: 16px;
+    margin-bottom: 18px;
+    overflow: hidden;
+    backdrop-filter: blur(12px);
+    transition: 0.3s;
+}
+
+.dzikir-card:hover {
+    border-color: rgba(0, 242, 255, 0.55);
+    box-shadow: 0 0 18px rgba(0, 242, 255, 0.08);
+}
+
+.dzikir-card summary {
+    cursor: pointer;
+    padding: 20px 24px;
+    color: #eafaff;
+    font-weight: 600;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.dzikir-card summary::-webkit-details-marker {
+    display: none;
+}
+
+.dzikir-card summary::after {
+    content: "+";
+    margin-left: auto;
+    color: var(--neon-blue);
+    font-size: 22px;
+}
+
+.dzikir-card[open] summary::after {
+    content: "−";
+}
+
+.dzikir-number {
+    background: rgba(0, 242, 255, 0.12);
+    border: 1px solid rgba(0, 242, 255, 0.4);
+    color: var(--neon-blue);
+    min-width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+}
+
+.dzikir-content {
+    padding: 5px 25px 25px;
+    border-top: 1px solid rgba(0, 242, 255, 0.12);
+    line-height: 1.9;
+}
+
+.dzikir-content p {
+    color: #d3e0e8;
+    margin: 15px 0;
+}
+
+.dzikir-arab {
+    direction: rtl;
+    text-align: right;
+    font-family: "Traditional Arabic", "Amiri", serif;
+    font-size: 1.8rem;
+    line-height: 2.2;
+    color: #ffffff;
+    margin: 25px 0 !important;
+}
+
+.dzikir-latin {
+    color: #9defff !important;
+    font-style: italic;
+}
+
+.dzikir-arti {
+    color: #d3e0e8;
+}
+
+.dzikir-faedah {
+    background: rgba(0, 242, 255, 0.06);
+    border-left: 3px solid var(--neon-blue);
+    border-radius: 8px;
+    padding: 15px 18px;
+    margin-top: 20px;
+}
+
+.dzikir-faedah strong {
+    color: var(--neon-blue);
+}
+
+.dzikir-content a {
+    color: var(--neon-blue);
+    text-decoration: none;
+}
+
+.dzikir-content a:hover {
+    text-decoration: underline;
+}
+
+.dzikir-content .jumlah {
+    display: inline-block;
+    color: var(--neon-blue);
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+@media (max-width: 700px) {
+    .dzikir-container {
+        width: 92%;
+    }
+
+    .dzikir-header h2 {
+        font-size: 1.6rem;
+    }
+
+    .dzikir-card summary {
+        padding: 16px;
+    }
+
+    .dzikir-content {
+        padding: 5px 17px 20px;
+    }
+
+    .dzikir-arab {
+        font-size: 1.5rem;
+		}
+    </style>
+	
+	</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">ISLAMI<span>CORE</span></div>
+		<li class="nav-item active"><a href="index.html">Beranda</a></li>
+        <div style="width: 150px; text-align: right;">
+            <small style="color: var(--neon-blue); font-size: 0.7rem; letter-spacing: 2px;">SYSTEM ACTIVE</small>
+        </div>
+    </nav>
+			
+			 <header class="hero">
+        <h1>DZIKIR PAGI & PETANG</h1>
+        <p>Mengingat Allah dalam Setiap Keadaan</p>
+    </header>
+	
+	<!-- DZIKIR PAGI & PETANG -->
+<section class="dzikir-container">
+
+    <div class="dzikir-header">
+        <h2>DZIKIR PAGI & PETANG</h2>
+        <p>
+            Kumpulan dzikir dan doa harian untuk mengawali
+            serta mengakhiri hari dengan mengingat Allah.
+        </p>
+    </div>
+
+    <div class="dzikir-tabs">
+        <a href="#dzikir-pagi" class="dzikir-tab">☀ Dzikir Pagi</a>
+        <a href="#dzikir-petang" class="dzikir-tab">☾ Dzikir Petang</a>
+    </div>
+
+    <!-- ================= DZIKIR PAGI ================= -->
+
+    <div class="dzikir-section" id="dzikir-pagi">
+
+        <h2 class="dzikir-section-title">
+             Dzikir yang Dibaca di Waktu Pagi
+        </h2>
+
+        <p class="dzikir-section-desc">
+            (Antara Shubuh hingga siang hari ketika matahari akan bergeser ke barat)
+        </p>
+
+        <div class="dzikir-card">
+            <div class="dzikir-content">
+                <p class="dzikir-arab">
+                    أَعُوذُ بِاللَّهِ مِنَ الشَّيْطَانِ الرَّجِيمِ
+                </p>
+                <p>
+                    “Aku berlindung kepada Allah dari godaan syaitan yang terkutuk.”
+                </p>
+            </div>
+        </div>
+
+        <!-- DZIKIR PAGI 1 -->
+        <details class="dzikir-card">
+            <summary>
+                <span class="dzikir-number">1</span>
+                Membaca Ayat Kursi
+            </summary>
+
+            <div class="dzikir-content">
+                <p>
+                    Membaca
+                    <a href="https://rumaysho.com/11661-3-waktu-utama-membaca-ayat-kursi.html" target="_blank">
+                        ayat Kursi
+                    </a>
+                </p>
+
+                <p class="dzikir-arab">
+                    ٱللَّهُ لَآ إِلَٰهَ إِلَّا هُوَ ٱلْحَىُّ ٱلْقَيُّومُ ۚ
+                    لَا تَأْخُذُهُۥ سِنَةٌ وَلَا نَوْمٌ ۚ
+                    لَّهُۥ مَا فِى ٱلسَّمَٰوَٰتِ وَمَا فِى ٱلْأَرْضِ ۗ
+                    مَن ذَا ٱلَّذِى يَشْفَعُ عِندَهُۥٓ إِلَّا بِإِذْنِهِۦ ۚ
+                    يَعْلَمُ مَا بَيْنَ أَيْدِيهِمْ وَمَا خَلْفَهُمْ ۖ
+                    وَلَا يُحِيطُونَ بِشَىْءٍ مِّنْ عِلْمِهِۦٓ إِلَّا بِمَا شَآءَ ۚ
+                    وَسِعَ كُرْسِيُّهُ ٱلسَّمَٰوَٰتِ وَٱلْأَرْضَ ۖ
+                    وَلَا يَـُٔودُهُۥ حِفْظُهُمَا ۚ
+                    وَهُوَ ٱلْعَلِىُّ ٱلْعَظِيمُ
+                </p>
+
+                <p class="dzikir-arti">
+                    “Allah, tidak ada ilah (yang berhak disembah) melainkan Dia,
+                    yang hidup kekal lagi terus menerus mengurus (makhluk-Nya).
+                    Dia tidak mengantuk dan tidak tidur. Kepunyaan-Nya apa yang
+                    di langit dan di bumi. Tiada yang dapat memberi syafa’at di
+                    sisi-Nya tanpa seizin-Nya. Dia mengetahui apa-apa yang di
+                    hadapan mereka dan di belakang mereka. Mereka tidak mengetahui
+                    apa-apa dari ilmu Allah melainkan apa yang dikehendaki-Nya.
+                    Kursi Allah meliputi langit dan bumi. Dia tidak merasa berat
+                    memelihara keduanya. Dan Dia Maha Tinggi lagi Maha besar.”
+                    (<a href="https://tafsirweb.com/37567-ayat-kursi.html" target="_blank">QS. Al Baqarah: 255</a>)
+                </p>
+
+                <p class="jumlah">(Dibaca 1 x)</p>
+
+                <div class="dzikir-faedah">
+                    <strong>Faedah:</strong>
+                    Siapa yang membacanya ketika petang, maka ia akan dilindungi
+                    (oleh Allah dari berbagai gangguan) hingga pagi. Siapa yang
+                    membacanya ketika pagi, maka ia akan dilindungi hingga petang.
+                    <a href="https://rumaysho.com/1636-bacaan-dzikir-pagi.html#_ftn1" target="_blank">[1]</a>
+                </div>
+            </div>
+        </details>
+
+        <!-- DZIKIR PAGI 2 -->
+        <details class="dzikir-card">
+            <summary>
+                <span class="dzikir-number">2</span>
+                Membaca Surat Al Ikhlas, Al Falaq, An Naas
+            </summary>
+
+            <div class="dzikir-content">
+
+                <p class="dzikir-arab">
+                    بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ
+                </p>
+
+                <p class="dzikir-arab">
+                    قُلْ هُوَ اللَّهُ أَحَدٌ اللَّهُ الصَّمَدُ
+                    لَمْ يَلِدْ وَلَمْ يُولَدْ وَلَمْ يَكُن لَّهُ كُفُوًا أَحَدٌ
+                </p>
+
+                <p class="dzikir-arti">
+                    “Dengan menyebut nama Allah Yang Maha Pengasih lagi Maha
+                    Penyayang. Katakanlah: Dialah Allah, Yang Maha Esa.
+                    Allah adalah ilah yang bergantung kepada-Nya segala urusan.
+                    Dia tidak beranak dan tiada pula diperanakkan, dan tidak ada
+                    seorang pun yang setara dengan Dia.”
+                    (QS. Al Ikhlas: 1-4)
+                </p>
+                <p class="jumlah">(Dibaca 3 x)</p>
+
+                <p class="dzikir-arab">
+                    بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ
+                </p>
+
+                <p class="dzikir-arab">
+                    قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ مِن شَرِّ مَا خَلَقَ
+                    وَمِن شَرِّ غَاسِقٍ إِذَا وَقَبَ
+                    وَمِن شَرِّ النَّفَّاثَاتِ فِي الْعُقَدِ
+                    وَمِن شَرِّ حَاسِدٍ إِذَا حَسَدَ
+                </p>
+
+                <p class="dzikir-arti">
+                    “Dengan menyebut nama Allah Yang Maha Pengasih lagi Maha
+                    Penyayang. Katakanlah: Aku berlindung kepada Rabb yang
+                    menguasai Shubuh, dari kejahatan makhluk-Nya, dan dari
+                    kejahatan malam apabila telah gelap gulita, dan dari
+                    kejahatan-kejahatan wanita tukang sihir yang menghembus
+                    pada buhul-buhul, dan dari kejahatan orang yang dengki
+                    apabila ia dengki”.
+                    (QS. Al Falaq: 1-5)
+                </p>
+                <p class="jumlah">(Dibaca 3 x)</p>
+
+                <p class="dzikir-arab">
+                    بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ
+                </p>
+
+                <p class="dzikir-arab">
+                    قُلْ أَعُوذُ بِرَبِّ النَّاسِ مَلِكِ النَّاسِ
+                    إِلَهِ النَّاسِ مِن شَرِّ الْوَسْوَاسِ الْخَنَّاسِ
+                    الَّذِي يُوَسْوِسُ فِي صُدُورِ النَّاسِ
+                    مِنَ الْجِنَّةِ وَ النَّاسِ
+                </p>
+
+                <p class="dzikir-arti">
+                    “Dengan menyebut nama Allah Yang Maha Pengasih lagi Maha
+                    Penyayang. Katakanlah: Aku berlindung kepada Rabb manusia.
+                    Raja manusia. Sembahan manusia, dari kejahatan (bisikan)
+                    syaitan yang biasa bersembunyi, yang membisikkan (kejahatan)
+                    ke dalam dada manusia, dari jin dan manusia.”
+                    (QS. An Naas: 1-6)
+                </p>
+                <p class="jumlah">(Dibaca 3 x)</p>
+
+                <div class="dzikir-faedah">
+                    <strong>Faedah:</strong>
+                    Siapa yang mengucapkannya masing-masing tiga kali ketika
+                    pagi dan petang, maka segala sesuatu akan dicukupkan untuknya.
+                    <a href="https://rumaysho.com/1636-bacaan-dzikir-pagi.html#_ftn2" target="_blank">[2]</a>
+                </div>
+
+            </div>
+        </details>
+
+        <!-- DZIKIR PAGI 3 -->
+        <details class="dzikir-card">
+            <summary>
+                <span class="dzikir-number">3</span>
+                Dzikir Memasuki Waktu Pagi
+            </summary>
+
+            <div class="dzikir-content">
+
+                <p class="dzikir-arab">
+                    أَصْبَحْنَا وَأَصْبَحَ الْمُلْكُ لِلَّهِ،
+                    وَالْحَمْدُ لِلَّهِ، لاَ إِلَـهَ إِلاَّ اللهُ
+                    وَحْدَهُ لاَ شَرِيْكَ لَهُ، لَهُ الْمُلْكُ
+                    وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيْرُ.
+                    رَبِّ أَسْأَلُكَ خَيْرَ مَا فِيْ هَذَا الْيَوْمِ
+                    وَخَيْرَ مَا بَعْدَهُ، وَأَعُوْذُ بِكَ مِنْ
+                    شَرِّ مَا فِيْ هَذَا الْيَوْمِ وَشَرِّ مَا بَعْدَهُ،
+                    رَبِّ أَعُوْذُ بِكَ مِنَ الْكَسَلِ وَسُوْءِ الْكِبَرِ،
+                    رَبِّ أَعُوْذُ بِكَ مِنْ عَذَابٍ فِي النَّارِ
+                    وَعَذَابٍ فِي الْقَبْرِ
+                </p>
+
+                <p class="dzikir-latin">
+                    Ash-bahnaa wa ash-bahal mulku lillah walhamdulillah,
+                    laa ilaha illallah wahdahu laa syarika lah,
+                    lahul mulku walahul hamdu wa huwa ‘ala kulli syai-in qodir.
+                    Robbi as-aluka khoiro maa fii hadzal yaum wa khoiro maa ba’dahu,
+                    wa a’udzu bika min syarri maa fii hadzal yaum wa syarri maa ba’dahu.
+                    Robbi a’udzu bika minal kasali wa su-il kibar.
+                    Robbi a’udzu bika min ‘adzabin fin naari wa ‘adzabin fil qobri.
+                </p>
+
+                <p><strong>Artinya:</strong></p>
+
+                <p class="dzikir-arti">
+                    “Kami telah memasuki waktu pagi dan kerajaan hanya milik Allah,
+                    segala puji bagi Allah. Tidak ada ilah (yang berhak disembah)
+                    kecuali Allah semata, tiada sekutu bagi-Nya. Milik Allah
+                    kerajaan dan bagi-Nya pujian. Dia-lah Yang Mahakuasa atas
+                    segala sesuatu. Wahai Rabbku, aku mohon kepada-Mu kebaikan
+                    di hari ini dan kebaikan sesudahnya. Aku berlindung kepada-Mu
+                    dari kejahatan hari ini dan kejahatan sesudahnya. Wahai Rabbku,
+                    aku berlindung kepada-Mu dari kemalasan dan kejelekan di hari
+                    tua. Wahai Rabbku, aku berlindung kepada-Mu dari siksaan di
+                    neraka dan siksaan di alam kubur.”
+                </p>
+
+                <p class="jumlah">(Dibaca 1 x)</p>
+
+                <div class="dzikir-faedah">
+                    <strong>Faedah:</strong>
+                    Meminta pada Allah kebaikan di hari ini dan kebaikan sesudahnya,
+                    juga agar terhindar dari kejelekan di hari ini dan kejelekan
+                    sesudahnya. Di dalamnya berisi pula permintaan agar terhindar
+                    dari rasa malas padahal mampu untuk beramal, juga agar terhindar
+                    dari kejelekan di masa tua. Di dalamnya juga berisi permintaan
+                    agar terselamatkan dari siksa kubur dan siksa neraka yang
+                    merupakan siksa terberat di hari kiamat kelak.
+                    <a href="https://rumaysho.com/1636-bacaan-dzikir-pagi.html#_ftn3" target="_blank">[3]</a>
+                </div>
+
+            </div>
+        </details>
+
+        <!-- LANJUTAN DZIKIR PAGI NOMOR 4–18 DILETAKKAN DI SINI -->
+
+    </div>
+
+   
+
+  
+    <div class="dzikir-section" id="dzikir-pagi">
+
+        <h2 class="dzikir-section-title">
+            Dzikir yang Dibaca di Waktu Petang
+        </h2>
+
+        <p class="dzikir-section-desc">
+            (Dari tenggelam matahari atau waktu Maghrib hingga pertengahan malam)
+        </p>
+
+        <div class="dzikir-card">
+            <div class="dzikir-content">
+  </div>
+
+  <div class="dzikir-intro">
+    <p class="arabic">أَعُوذُ بِاللَّهِ مِنَ الشَّيْطَانِ الرَّجِيمِ</p>
+    <p>“Aku berlindung kepada Allah dari godaan syaitan yang terkutuk.”</p>
+  </div>
+
+  <!-- DZIKIR 1 -->
+  <article class="dzikir-card">
+    <h3><span class="dzikir-number">1</span>Membaca ayat Kursi</h3>
+    <p class="arabic">ٱللَّهُ لَآ إِلَٰهَ إِلَّا هُوَ ٱلْحَىُّ ٱلْقَيُّومُ ۚ لَا تَأْخُذُهُۥ سِنَةٌ وَلَا نَوْمٌ ۚ لَّهُۥ مَا فِى ٱلسَّمَٰوَٰتِ وَمَا فِى ٱلْأَرْضِ ۗ مَن ذَا ٱلَّذِى يَشْفَعُ عِندَهُۥٓ إِلَّا بِإِذْنِهِۦ ۚ يَعْلَمُ مَا بَيْنَ أَيْدِيهِمْ وَمَا خَلْفَهُمْ ۖ وَلَا يُحِيطُونَ بِشَىْءٍ مِّنْ عِلْمِهِۦٓ إِلَّا بِمَا شَآءَ ۚ وَسِعَ كُرْسِيُّهُ ٱلسَّمَٰوَٰتِ وَٱلْأَرْضَ ۖ وَلَا يَـُٔودُهُۥ حِفْظُهُمَا ۚ وَهُوَ ٱلْعَلِىُّ ٱلْعَظِيمُ</p>
+    <p class="meaning">“<em>Allah, tidak ada ilah (yang berhak disembah) melainkan Dia, yang hidup kekal lagi terus menerus mengurus (makhluk-Nya). Dia tidak mengantuk dan tidak tidur. Kepunyaan-Nya apa yang di langit dan di bumi. Tiada yang dapat memberi syafa’at di sisi-Nya tanpa seizin-Nya. Dia mengetahui apa-apa yang di hadapan mereka dan di belakang mereka. Mereka tidak mengetahui apa-apa dari ilmu Allah melainkan apa yang dikehendaki-Nya. Kursi Allah meliputi langit dan bumi. Dia tidak merasa berat memelihara keduanya. Dan Dia Maha Tinggi lagi Maha besar.</em>” (QS. Al Baqarah: 255)</p>
+    <span class="dibaca">(Dibaca 1 x)</span>
+    <div class="faedah"><strong>Faedah:</strong> Siapa yang membacanya ketika petang, maka ia akan dilindungi (oleh Allah dari berbagai gangguan) hingga pagi. Siapa yang membacanya ketika pagi, maka ia akan dilindungi hingga petang.<a href="https://rumaysho.com/1638-bacaan-dzikir-petang.html#_ftn1" target="_blank" rel="noopener noreferrer"><strong>[1]</strong></a></div>
+  </article>
+
+  <!-- DZIKIR 2 -->
+  <article class="dzikir-card">
+    <h3><span class="dzikir-number">2</span>Membaca surat Al Ikhlas, Al Falaq, An Naas</h3>
+
+    <p class="arabic">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ<br>قُلْ هُوَ اللَّهُ أَحَدٌ اللَّهُ الصَّمَدُ لَمْ يَلِدْ وَلَمْ يُولَدْ وَلَمْ يَكُن لَّهُ كُفُوًا أَحَدٌ</p>
+    <p class="meaning"><em>“Dengan menyebut nama Allah Yang Maha Pengasih lagi Maha Penyayang. Katakanlah: Dialah Allah, Yang Maha Esa. Allah adalah ilah yang bergantung kepada-Nya segala urusan. Dia tidak beranak dan tiada pula diperanakkan, dan tidak ada seorang pun yang setara dengan Dia.”</em> (QS. Al Ikhlas: 1-4)</p>
+    <span class="dibaca">(Dibaca 3 x)</span>
+
+    <p class="arabic">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ<br>قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ مِن شَرِّ مَا خَلَقَ وَمِن شَرِّ غَاسِقٍ إِذَا وَقَبَ وَمِن شَرِّ النَّفَّاثَاتِ فِي الْعُقَدِ وَمِن شَرِّ حَاسِدٍ إِذَا حَسَدَ</p>
+    <p class="meaning"><em>“Dengan menyebut nama Allah Yang Maha Pengasih lagi Maha Penyayang. Katakanlah: Aku berlindung kepada Rabb yang menguasai Shubuh, dari kejahatan makhluk-Nya, dan dari kejahatan malam apabila telah gelap gulita, dan dari kejahatan-kejahatan wanita tukang sihir yang menghembus pada buhul-buhul, dan dari kejahatan orang yang dengki apabila ia dengki”.</em> (QS. Al Falaq: 1-5)</p>
+    <span class="dibaca">(Dibaca 3 x)</span>
+
+    <p class="arabic">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ<br>قُلْ أَعُوذُ بِرَبِّ النَّاسِ مَلِكِ النَّاسِ إِلَهِ النَّاسِ مِن شَرِّ الْوَسْوَاسِ الْخَنَّاسِ الَّذِي يُوَسْوِسُ فِي صُدُورِ النَّاسِ مِنَ الْجِنَّةِ وَ النَّاسِ</p>
+    <p class="meaning"><em>“Dengan menyebut nama Allah Yang Maha Pengasih lagi Maha Penyayang. Katakanlah: Aku berlindung kepada Rabb manusia. Raja manusia. Sembahan manusia, dari kejahatan (bisikan) syaitan yang biasa bersembunyi, yang membisikkan (kejahatan) ke dalam dada manusia, dari jin dan manusia.”</em> (QS. An Naas: 1-6)</p>
+    <span class="dibaca">(Dibaca 3 x)</span>
+
+    <div class="faedah"><strong>Faedah:</strong> Siapa yang mengucapkannya masing-masing tiga kali ketika pagi dan petang, maka segala sesuatu akan dicukupkan untuknya.<a href="https://rumaysho.com/1638-bacaan-dzikir-petang.html#_ftn2" target="_blank" rel="noopener noreferrer"><strong>[2]</strong></a></div>
+  </article>
+
+  <!-- DZIKIR 3 -->
+  <article class="dzikir-card">
+    <h3><span class="dzikir-number">3</span></h3>
+    <p class="arabic">أَمْسَيْنَا وَأَمْسَى الْمُلْكُ للهِ، وَالْحَمْدُ للهِ، لَا إِلَهَ إِلاَّ اللهُ وَحْدَهُ لاَ شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ، وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ، رَبِّ أَسْأَلُكَ خَيْرَ مَا فِي هَذِهِ اللَّيْلَةِ وَخَيْرَ مَا بَعْدَهَا، وَأَعُوذُبِكَ مِنْ شَرِّ مَا فِي هَذِهِ اللَّيْلَةِ وَشَرِّ مَا بَعْدَهَا، رَبِّ أَعُوذُبِكَ مِنَ الْكَسَلِ وَسُوءِ الْكِبَرِ، رَبِّ أَعُوذُبِكَ مِنْ عَذَابٍ فِي النَّارِ وَعَذَابٍ فِي الْقَبْرِ</p>
+    <p class="latin">Amsaynaa wa amsal mulku lillah walhamdulillah, laa ilaha illallah wahdahu laa syarika lah, lahul mulku walahul hamdu wa huwa ‘ala kulli syai-in qodir. Robbi as-aluka khoiro maa fii hadzihil lailah wa khoiro maa ba’dahaa, wa a’udzu bika min syarri maa fii hadzihil lailah wa syarri maa ba’dahaa. Robbi a’udzu bika minal kasali wa suu-il kibar. Robbi a’udzu bika min ‘adzabin fin naari wa ‘adzabin fil qobri.</p>
+    <p class="meaning"><strong>Artinya:</strong> “Kami telah memasuki waktu petang dan kerajaan hanya milik Allah, segala puji bagi Allah. [Tidak ada ilah (yang berhak disembah) kecuali Allah semata, tiada sekutu bagi-Nya](https://rumaysho.com/194-tafsiran-kalimat-laa-ilaha-illallah-menurut-para-ulama-ahli-tafsir.html). Milik Allah kerajaan dan bagi-Nya pujian. Dia-lah Yang Mahakuasa atas segala sesuatu.Wahai Rabbku, aku mohon kepada-Mu kebaikan di malam ini dan kebaikan sesudahnya. Aku berlindung kepadaMu dari kejahatan malam ini dan kejahatan sesudahnya. Wahai Rabbku, aku berlindung kepadaMu dari kemalasan dan kejelekan di hari tua. Wahai Rabbku, aku berlindung kepada-Mu dari siksaan di neraka dan siksaan di kubur.”</p>
+    <span class="dibaca">(Dibaca 1 x)</span>
+    <div class="faedah"><strong>Faedah:</strong> Meminta pada Allah kebaikan di malam ini dan kebaikan sesudahnya, juga agar terhindar dari kejelekan di malam ini dan kejelekan sesudahnya. Di dalamnya berisi pula permintaan agar terhindar dari rasa malas padahal mampu untuk beramal, juga agar terhindar dari kejelekan di masa tua. Di dalamnya juga berisi permintaan agar <a href="https://rumaysho.com/1110-keutamaan-surat-al-mulk-mencegah-dari-siksa-kubur.html" target="_blank" rel="noopener noreferrer">terselamatkan dari siksa kubur</a> dan siksa neraka yang merupakan siksa terberat di hari kiamat kelak.<a href="https://rumaysho.com/1638-bacaan-dzikir-petang.html#_ftn3" target="_blank" rel="noopener noreferrer"><strong>[3]</strong></a></div>
+  </article>
+
+  <!-- DZIKIR 4 -->
+  <article class="dzikir-card">
+    <h3><span class="dzikir-number">4</span></h3>
+    <p class="arabic">اللَّهُمَّ بِكَ أَمْسَيْنَا، وَبِكَ أَصْبَحْنَا،وَبِكَ نَحْيَا، وَبِكَ نَمُوتُ، وَإِلَيْكَ الْمَصِيْرُ</p>
+    <p class="latin">Allahumma bika amsaynaa wa bika ash-bahnaa wa bika nahyaa wa bika namuutu wa ilaikal mashiir.</p>
+    <p class="meaning"><strong>Artinya:</strong> “Ya Allah, dengan rahmat dan pertolongan-Mu kami memasuki waktu petang, dan dengan rahmat dan pertolongan-Mu kami memasuki waktu pagi. Dengan rahmat dan pertolonganMu kami hidup dan dengan kehendakMu kami mati. Dan kepada-Mu tempat kembali (bagi semua makhluk).”</p>
+    <span class="dibaca">(Dibaca 1 x)</span>
+    <a href="https://rumaysho.com/1638-bacaan-dzikir-petang.html#_ftn4" target="_blank" rel="noopener noreferrer">[4]</a>
+  </article>
+
+  <!-- DZIKIR 5 -->
+  <article class="dzikir-card">
+    <h3><span class="dzikir-number">5</span>Membaca <em>Sayyidul Istighfar</em></h3>
+    <p class="arabic">اَللَّهُمَّ أَنْتَ رَبِّيْ لاَ إِلَـهَ إِلاَّ أَنْتَ، خَلَقْتَنِيْ وَأَنَا عَبْدُكَ، وَأَنَا عَلَى عَهْدِكَ وَوَعْدِكَ مَا اسْتَطَعْتُ، أَعُوْذُ بِكَ مِنْ شَرِّ مَا صَنَعْتُ، أَبُوْءُ لَكَ بِنِعْمَتِكَ عَلَيَّ، وَأَبُوْءُ بِذَنْبِيْ فَاغْفِرْ لِيْ فَإِنَّهُ لاَ يَغْفِرُ الذُّنُوْبَ إِلاَّ أَنْتَ</p>
+    <p class="latin">Allahumma anta robbii laa ilaha illa anta, kholaqtanii wa anaa ‘abduka wa anaa ‘ala ‘ahdika wa wa’dika mas-tatho’tu. A’udzu bika min syarri maa shona’tu. Abu-u laka bi ni’matika ‘alayya wa abu-u bi dzambii. Fagh-firlii fainnahu laa yagh-firudz dzunuuba illa anta.</p>
+    <p class="meaning"><strong>Artinya:</strong> “Ya Allah, Engkau adalah Rabbku, tidak ada ilah yang berhak disembah kecuali Engkau, Engkaulah yang menciptakanku. Aku adalah hamba-Mu. Aku akan setia pada perjanjianku pada-Mu (yaitu aku akan mentauhidkan-Mu) semampuku dan aku yakin akan janji-Mu (berupa surga untukku). Aku berlindung kepada-Mu dari kejelekan yang kuperbuat. Aku mengakui nikmat-Mu kepadaku dan aku mengakui dosaku. Oleh karena itu, ampunilah aku. Sesungguhnya tiada yang mengampuni dosa kecuali Engkau.”</p>
+    <span class="dibaca">(Dibaca 1 x)</span>
+    <div class="faedah"><strong>Faedah:</strong> Barangsiapa mengucapkan dzikir ini di siang hari dalam keadaan penuh keyakinan, lalu ia mati pada hari tersebut sebelum petang hari, maka ia termasuk penghuni surga. Barangsiapa yang mengucapkannya di malam hari dalam keadaan penuh keyakinan, lalu ia mati sebelum pagi, maka ia termasuk penghuni surga.<a href="https://rumaysho.com/1638-bacaan-dzikir-petang.html#_ftn5" target="_blank" rel="noopener noreferrer"><strong>[5]</strong></a></div>
+  </article>
+
+  <!-- DZIKIR 6 -->
+  <article class="dzikir-card">
+    <h3><span class="dzikir-number">6</span></h3>
+    <p class="arabic">اَللَّهُمَّ إِنِّيْ أَمْسَيْتُ أُشْهِدُكَ وَأُشْهِدُ حَمَلَةَ عَرْشِكَ، وَمَلاَئِكَتَكَ وَجَمِيْعَ خَلْقِكَ، أَنَّكَ أَنْتَ اللهُ لاَ إِلَـهَ إِلاَّ أَنْتَ وَحْدَكَ لاَ شَرِيْكَ لَكَ، وَأَنَّ مُحَمَّدًا عَبْدُكَ وَرَسُوْلُكَ</p>
+    <p class="latin">Allahumma inni amsaytu usy-hiduka wa usy-hidu hamalata ‘arsyika wa malaa-ikatak wa jami’a kholqik, annaka antallahu laa ilaha illa anta wahdaka laa syariika lak, wa anna Muhammadan ‘abduka wa rosuuluk.</p>
+    <p class="meaning"><strong>Artinya:</strong> “Ya Allah, sesungguhnya aku di waktu petang ini mempersaksikan Engkau, malaikat yang memikul ‘Arys-Mu, malaikat-malaikat dan seluruh makhluk-Mu, bahwa sesungguhnya Engkau adalah Allah, tiada ilah yang berhak disembah kecuali Engkau semata, tiada sekutu bagi-Mu dan sesungguhnya Muhammad adalah hamba dan utusan-Mu.”</p>
+    <span class="dibaca">(Dibaca 4 x)</span>
+    <div class="faedah"><strong>Faedah:</strong> Barangsiapa yang mengucapkan dzikir ini ketika pagi dan petang hari sebanyak empat kali, maka Allah akan membebaskan dirinya dari <a href="https://rumaysho.com/21229-doa-meminta-perlindungan-dari-siksa-neraka-dari-kejelekan-kaya-dan-miskin.html" target="_blank" rel="noopener noreferrer">siksa neraka</a>.<a href="https://rumaysho.com/1638-bacaan-dzikir-petang.html#_ftn6" target="_blank" rel="noopener noreferrer"><strong>[6]</strong></a></div>
+  </article>
+
+  <!-- DZIKIR 7 -->
+  <article class="dzikir-card">
+    <h3><span class="dzikir-number">7</span></h3>
+    <p class="arabic">اَللَّهُمَّ إِنِّيْ أَسْأَلُكَ الْعَفْوَ وَالْعَافِيَةَ فِي الدُّنْيَا وَاْلآخِرَةِ، اَللَّهُمَّ إِنِّيْ أَسْأَلُكَ الْعَفْوَ وَالْعَافِيَةَ فِي دِيْنِيْ وَدُنْيَايَ وَأَهْلِيْ وَمَالِيْ اللَّهُمَّ اسْتُرْ عَوْرَاتِى وَآمِنْ رَوْعَاتِى. اَللَّهُمَّ احْفَظْنِيْ مِنْ بَيْنِ يَدَيَّ، وَمِنْ خَلْفِيْ، وَعَنْ يَمِيْنِيْ وَعَنْ شِمَالِيْ، وَمِنْ فَوْقِيْ، وَأَعُوْذُ بِعَظَمَتِكَ أَنْ أُغْتَالَ مِنْ تَحْتِيْ</p>
+    <p class="latin">Allahumma innii as-alukal ‘afwa wal ‘aafiyah fid dunyaa wal aakhiroh. Allahumma innii as-alukal ‘afwa wal ‘aafiyah fii diinii wa dun-yaaya wa ahlii wa maalii. Allahumas-tur ‘awrootii wa aamin row’aatii. Allahummahfazh-nii mim bayni yadayya wa min kholfii wa ‘an yamiinii wa ‘an syimaalii wa min fawqii wa a’udzu bi ‘azhomatik an ugh-taala min tahtii.</p>
+    <p class="meaning"><strong>Artinya:</strong> “Ya Allah, sesungguhnya aku memohon kebajikan dan keselamatan di dunia dan akhirat. Ya Allah, sesungguhnya aku memohon kebajikan dan keselamatan dalam agama, dunia, keluarga dan hartaku. Ya Allah, tutupilah auratku (aib dan sesuatu yang tidak layak dilihat orang) dan tenteramkanlah aku dari rasa takut. Ya Allah, peliharalah aku dari muka, belakang, kanan, kiri dan atasku. Aku berlindung dengan kebesaran-Mu, agar aku tidak disambar dari bawahku (oleh ular atau tenggelam dalam bumi dan lain-lain yang membuat aku jatuh).”</p>
+    <span class="dibaca">(Dibaca 1 x)</span>
+    <div class="faedah"><strong>Faedah:</strong> Rasulullah <em>shallallahu ‘alaihi wa sallam</em> tidaklah pernah meninggalkan do’a ini di pagi dan petang hari. Di dalamnya berisi perlindungan dan keselamatan pada agama, dunia, keluarga dan harta dari berbagai macam gangguan yang datang dari berbagai arah.<a href="https://rumaysho.com/1638-bacaan-dzikir-petang.html#_ftn7" target="_blank" rel="noopener noreferrer">[7]</a></div>
+  </article>
+
+  <!-- DZIKIR 8 -->
+  <article class="dzikir-card">
+    <h3><span class="dzikir-number">8</span></h3>
+    <p class="arabic">اَللَّهُمَّ عَالِمَ الْغَيْبِ وَالشَّهَادَةِ فَاطِرَ السَّمَاوَاتِ وَاْلأَرْضِ، رَبَّ كُلِّ شَيْءٍ وَمَلِيْكَهُ، أَشْهَدُ أَنْ لاَ إِلَـهَ إِلاَّ أَنْتَ، أَعُوْذُ بِكَ مِنْ شَرِّ نَفْسِيْ، وَمِنْ شَرِّ الشَّيْطَانِ وَشِرْكِهِ، وَأَنْ أَقْتَرِفَ عَلَى نَفْسِيْ سُوْءًا أَوْ أَجُرَّهُ إِلَى مُسْلِمٍ</p>
+    <p class="latin">Allahumma ‘aalimal ghoybi wasy-syahaadah faathiros samaawaati wal ardh. Robba kulli syai-in wa maliikah. Asyhadu alla ilaha illa anta. A’udzu bika min syarri nafsii wa min syarrisy-syaythooni wa syirkihi, wa an aqtarifa ‘alaa nafsii suu-an aw ajurrohu ilaa muslim.</p>
+    <p class="meaning"><strong>Artinya:</strong> “Ya Allah, Yang Maha Mengetahui yang ghaib dan yang nyata, wahai Rabb pencipta langit dan bumi, Rabb segala sesuatu dan yang merajainya. Aku bersaksi bahwa tidak ada ilah yang berhak disembah kecuali Engkau. Aku berlindung kepadaMu dari kejahatan diriku, setan dan balatentaranya (godaan untuk berbuat syirik pada Allah), dan aku (berlindung kepada-Mu) dari berbuat kejelekan terhadap diriku atau menyeretnya kepada seorang muslim.”</p>
+    <span class="dibaca">(Dibaca 1 x)</span>
+    <div class="faedah"><strong>Faedah:</strong> Do’a ini diajarkan oleh Rasulullah <em>shallallahu ‘alaihi wa sallam</em> pada Abu Bakr Ash Shiddiq untuk dibaca pada pagi, petang dan saat beranjak tidur.<a href="https://rumaysho.com/1638-bacaan-dzikir-petang.html#_ftn8" target="_blank" rel="noopener noreferrer">[8]</a></div>
+  </article>
+
+  <!-- DZIKIR 9 -->
+  <article class="dzikir-card">
+    <h3><span class="dzikir-number">9</span></h3>
+    <p class="arabic">بِسْمِ اللَّهِ الَّذِى لاَ يَضُرُّ مَعَ اسْمِهِ شَىْءٌ فِى الأَرْضِ وَلاَ فِى السَّمَاءِ وَهُوَ السَّمِيعُ الْعَلِيمُ</p>
+    <p class="latin">Bismillahilladzi laa yadhurru ma’asmihi syai-un fil ardhi wa laa fis samaa’ wa huwas samii’ul ‘aliim.</p>
+    <p class="meaning"><strong>Artinya:</strong> “Dengan nama Allah yang bila disebut, segala sesuatu di bumi dan langit tidak akan berbahaya, Dia-lah Yang Maha Mendengar lagi Maha Mengetahui.”</p>
+    <span class="dibaca">(Dibaca 3 x)</span>
+    <div class="faedah"><strong>Faedah:</strong> Barangsiapa yang mengucapkan dzikir tersebut sebanyak tiga kali di pagi hari dan tiga kali di petang hari, maka tidak akan ada bahaya yang tiba-tiba yang memudaratkannya.<a href="https://rumaysho.com/1638-bacaan-dzikir-petang.html#_ftn9" target="_blank" rel="noopener noreferrer"><strong>[9]</strong></a></div>
+  </article>
+
+  <!-- DZIKIR 10 -->
+  <article class="dzikir-card">
+    <h3><span class="dzikir-number">10</span></h3>
+    <p class="arabic">رَضِيْتُ بِاللهِ رَبًّا، وَبِاْلإِسْلاَمِ دِيْنًا، وَبِمُحَمَّدٍ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ نَبِيًّا</p>
+    <p class="latin">Rodhiitu billaahi robbaa wa bil-islaami diinaa, wa bi-muhammadin shallallaahu ‘alaihi wa sallama nabiyyaa.</p>
+    <p class="meaning"><strong>Artinya:</strong> “Aku ridha Allah sebagai Rabb, Islam sebagai agama dan Muhammad <em>shallallahu ‘alaihi wa sallam</em> sebagai nabi.”</p>
+    <span class="dibaca">(Dibaca 3 x)</span>
+    <div class="faedah"><strong>Faedah:</strong> Barangsiapa yang mengucapkan hadits ini sebanyak tiga kali di pagi hari dan tiga kali di petang hari, maka pantas baginya <a href="https://rumaysho.com/16814-doa-mohon-ridha-allah-ketika-sujud.html" target="_blank" rel="noopener noreferrer">mendapatkan ridha Allah</a>. <a href="https://rumaysho.com/1638-bacaan-dzikir-petang.html#_ftn10" target="_blank" rel="noopener noreferrer">[10]</a></div>
+  </article>
+
+  <!-- DZIKIR 11 -->
+  <article class="dzikir-card">
+    <h3><span class="dzikir-number">11</span></h3>
+    <p class="arabic">يَا حَيُّ يَا قَيُّوْمُ بِرَحْمَتِكَ أَسْتَغِيْثُ، وَأَصْلِحْ لِيْ شَأْنِيْ كُلَّهُ وَلاَ تَكِلْنِيْ إِلَى نَفْسِيْ طَرْفَةَ عَيْنٍ أَبَدًا</p>
+    <p class="latin">Yaa Hayyu Yaa Qoyyum, bi-rohmatika as-taghiits, wa ash-lih lii sya’nii kullahu wa laa takilnii ilaa nafsii thorfata ‘ainin abadan.</p>
+    <p class="meaning"><strong>Artinya:</strong> “Wahai Rabb Yang Maha Hidup, wahai Rabb Yang Berdiri Sendiri (tidak butuh segala sesuatu), dengan rahmat-Mu aku minta pertolongan, perbaikilah segala urusanku dan jangan diserahkan kepadaku sekali pun sekejap mata (tanpa mendapat pertolongan dariMu).”</p>
+    <span class="dibaca">(Dibaca 1 x)</span>
+    <div class="faedah"><strong>Faedah:</strong> Dzikir ini diajarkan oleh Nabi <em>shallallahu ‘alaihi wa sallam</em> pada Fathimah supaya diamalkan pagi dan petang. <a href="https://rumaysho.com/1638-bacaan-dzikir-petang.html#_ftn11" target="_blank" rel="noopener noreferrer">[11]</a></div>
+  </article>
+
+  <!-- DZIKIR 12 -->
+  <article class="dzikir-card">
+    <h3><span class="dzikir-number">12</span></h3>
+    <p class="arabic">سُبْحَانَ اللهِ وَبِحَمْدِهِ</p>
+    <p class="latin">Subhanallah wa bi-hamdih.</p>
+    <p class="meaning"><strong>Artinya:</strong> “Maha suci Allah, aku memuji-Nya.”</p>
+    <span class="dibaca">(Dibaca 100 x)</span>
+    <div class="faedah"><strong>Faedah:</strong> Barangsiapa yang mengucapkan kalimat ‘<em>subhanallah wa bi hamdih</em>’ di pagi dan petang hari sebanyak 100 x, maka tidak ada yang datang pada hari kiamat yang lebih baik dari yang ia lakukan kecuali orang yang mengucapkan semisal atau lebih dari itu.<a href="https://rumaysho.com/1638-bacaan-dzikir-petang.html#_ftn12" target="_blank" rel="noopener noreferrer"><strong>[12]</strong></a></div>
+  </article>
+
+  <!-- DZIKIR 13 -->
+  <article class="dzikir-card">
+    <h3><span class="dzikir-number">13</span></h3>
+    <p class="arabic">لاَ إِلَـهَ إِلاَّ اللهُ وَحْدَهُ لاَ شَرِيْكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيْرُ</p>
+    <p class="latin">Laa ilaha illallah wahdahu laa syarika lah, lahul mulku walahul hamdu wa huwa ‘ala kulli syai-in qodiir.</p>
+    <p class="meaning"><strong>Artinya:</strong> “Tidak ada ilah yang berhak disembah selain Allah semata, tidak ada sekutu bagi-Nya. Bagi-Nya kerajaan dan segala pujian. Dia-lah yang berkuasa atas segala sesuatu.”</p>
+    <span class="dibaca">(Dibaca 1o x)</span>
+    <div class="faedah"><strong>Faedah:</strong> Barangsiapa yang membaca dzikir tersebut di pagi hari sebanyak sepuluh kali, Allah akan mencatatkan baginya 10 kebaikan, menghapuskan baginya 10 kesalahan, ia juga mendapatkan kebaikan semisal memerdekakan 10 <a href="https://rumaysho.com/1790-pembantu-bukanlah-budak.html" target="_blank" rel="noopener noreferrer">budak</a>, Allah akan melindunginya dari gangguan setan hingg petang hari. Siapa yang mengucapkannya di petang hari, ia akan mendapatkan keutamaan semisal itu pula. <a href="https://rumaysho.com/1638-bacaan-dzikir-petang.html#_ftn13" target="_blank" rel="noopener noreferrer">[13]</a></div>
+  </article>
+
+  <!-- DZIKIR 14 -->
+  <article class="dzikir-card">
+    <h3><span class="dzikir-number">14</span></h3>
+    <p class="arabic">أَعُوْذُ بِكَلِمَاتِ اللهِ التَّامَّاتِ مِنْ شَرِّ مَا خَلَقَ</p>
+    <p class="latin">A’udzu bikalimaatillahit-taammaati min syarri maa kholaq.</p>
+    <p class="meaning"><strong>Artinya:</strong> “Aku berlindung dengan kalimat-kalimat Allah yang sempurna dari kejahatan makhluk yang diciptakanNya.”</p>
+    <span class="dibaca">(Dibaca 3 x pada waktu petang)</span>
+    <div class="faedah"><strong>Faedah:</strong> Siapa yang mengucapkannya di petang hari, niscaya tidak ada racun atau binatang (seperti: kalajengking) yang mencelakakannya di malam itu.</div>
+  </article>
+
+
+
+</section>
