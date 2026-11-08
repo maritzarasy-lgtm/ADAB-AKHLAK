@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IslamiCore - Futuristik Nav</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Reset & Base Styling */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        :root {
+            --neon-blue: #00f2ff;
+            --deep-space: #05060a;
+            --glass: rgba(255, 255, 255, 0.03);
+            --border-glass: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            background-color: var(--deep-space);
+            color: white;
+            min-height: 100vh;
+            overflow-x: hidden;
+            /* Background efek luar angkasa sederhana */
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(0, 242, 255, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(0, 242, 255, 0.05) 0%, transparent 40%);
+        }
+
+        /* Navbar Container */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 6%;
+            height: 80px;
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-glass);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        /* Logo Area */
+        .logo {
+            font-weight: 800;
+            font-size: 1.6rem;
+            letter-spacing: 3px;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+
+        .logo span {
+            color: var(--neon-blue);
+            text-shadow: 0 0 15px var(--neon-blue);
+        }
+
+        /* Nav Links */
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 3rem;
+            height: 100%;
+            align-items: center;
+        }
+
+        .nav-item {
+            position: relative;
+            height: 100%;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.4s ease;
+        }
+
+        /* Hover Effect Line */
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 25px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--neon-blue);
+            box-shadow: 0 0 10px var(--neon-blue);
+            transition: width 0.4s ease;
+        }
+
+        .nav-links a:hover::after, 
+        .nav-item.active a::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: var(--neon-blue);
+        }
+
+        /* Dropdown Styling */
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%) translateY(20px);
+            background: rgba(10, 11, 16, 0.95);
+            border: 1px solid var(--border-glass);
+            min-width: 220px;
+            padding: 1rem 0;
+            list-style: none;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .dropdown-menu::before {
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--neon-blue), transparent);
+        }
+
+        .nav-item:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .dropdown-menu li a {
+            padding: 0.7rem 1.5rem;
+            display: block;
+            text-transform: none;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
+            transition: 0.3s;
+        }
+
+        .dropdown-menu li a::after { display: none; } /* Hilangkan garis bawah di dropdown */
+
+        .dropdown-menu li a:hover {
+            background: rgba(0, 242, 255, 0.1);
+            color: var(--neon-blue);
+            padding-left: 1.8rem;
+        }
+
+        /* Content Placeholder */
+        .hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: calc(100vh - 80px);
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, #fff, var(--neon-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+		
+		  /* ==============================
+           1. PENGATURAN DASAR
+        ============================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --neon-blue: #00f2ff;
+            --deep-space: #05060a;
+            --glass: rgba(255, 255, 255, 0.025);
+            --border: rgba(255, 255, 255, 0.12);
+            --text-gray: #aeb8bd;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background:
+                radial-gradient(
+                    circle at 50% 0%,
+                    rgba(0, 242, 255, 0.12),
+                    transparent 35%
+                ),
+                var(--deep-space);
+            color: white;
+            line-height: 1.8;
+        }
+
+
+        /* ==============================
+           2. NAVBAR
+        ============================== */
+
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            width: 100%;
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(5, 6, 10, 0.8);
+            backdrop-filter: blur(18px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            color: white;
+        }
+
+        .logo span {
+            color: var(--neon-blue);
+            text-shadow: 0 0 15px var(--neon-blue);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #b8c4c8;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--neon-blue);
+        }
+
+        .nav-links .active {
+            color: white;
+            border-bottom: 2px solid var(--neon-blue);
+            padding-bottom: 8px;
+        }
+
+        .system-status {
+            color: var(--neon-blue);
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+
+
+        /* ==============================
+           3. HERO SECTION
+        ============================== */
+
+        .hero {
+            min-height: 330px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 70px 20px;
+        }
+
+        .hero h1 {
+            max-width: 900px;
+            font-size: clamp(32px, 6vw, 55px);
+            font-weight: 800;
+            line-height: 1.2;
+            background: linear-gradient(
+                90deg,
+                #ffffff,
+                var(--neon-blue)
+            );
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 18px;
+        }
+
+        .hero p {
+            color: var(--text-gray);
+            font-size: 15px;
+            letter-spacing: 1px;
+        }
+
+
+        /* ==============================
+           4. AREA MATERI
+        ============================== */
+
+        .materi {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 30px 60px;
+        }
+
+        .intro {
+            background: var(--glass);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+
+        .intro p {
+            color: var(--text-gray);
+            font-size: 15px;
+            line-height: 2;
+            text-align: justify;
+        }
+
+
+        /* ==============================
+           5. KARTU DZIKIR
+        ============================== */
+
+        .dzikir-card {
+            background: var(--glass);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 35px;
+            margin-bottom: 28px;
+            transition: 0.3s ease;
+        }
+
+        .dzikir-card:hover {
+            border-color: rgba(0, 242, 255, 0.4);
+            background: rgba(0, 242, 255, 0.025);
+        }
+
+        .dzikir-number {
+            display: inline-block;
+            color: var(--neon-blue);
+            font-size: 13px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+
+        .dzikir-card h2 {
+            font-size: 21px;
+            color: white;
+            margin-bottom: 22px;
+        }
+
+
+        /* ==============================
+           6. TEKS ARAB
+        ============================== */
+
+        .arabic {
+            font-family: 'Amiri', serif;
+            font-size: 29px;
+            line-height: 2.2;
+            text-align: right;
+            direction: rtl;
+            color: #ffffff;
+            padding: 25px;
+            background: rgba(0, 242, 255, 0.035);
+            border: 1px solid rgba(0, 242, 255, 0.2);
+            border-radius: 15px;
+            margin-bottom: 22px;
+        }
+
+
+        /* ==============================
+           7. LATIN
+        ============================== */
+
+        .latin {
+            color: var(--neon-blue);
+            font-size: 14px;
+            font-style: italic;
+            line-height: 2;
+            margin-bottom: 22px;
+        }
+
+
+        /* ==============================
+           8. ARTI DAN FAEDAH
+        ============================== */
+
+        .subheading {
+            color: white;
+            font-size: 15px;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .meaning {
+            color: var(--text-gray);
+            font-size: 14px;
+            line-height: 2;
+            text-align: justify;
+            margin-bottom: 20px;
+        }
+
+        .faedah {
+            background: rgba(0, 242, 255, 0.035);
+            border-left: 3px solid var(--neon-blue);
+            border-radius: 0 12px 12px 0;
+            padding: 18px 22px;
+            color: var(--text-gray);
+            font-size: 14px;
+            line-height: 2;
+        }
+
+        .faedah strong {
+            color: var(--neon-blue);
+        }
+
+        .faedah a,
+        .source a {
+            color: var(--neon-blue);
+            text-decoration: none;
+        }
+
+        .faedah a:hover,
+        .source a:hover {
+            text-decoration: underline;
+        }
+
+
+        /* ==============================
+           9. BAGIAN KHUSUS TANPA TEKS ARAB
+        ============================== */
+
+        .simple-description {
+            color: var(--text-gray);
+            font-size: 15px;
+            line-height: 2;
+            text-align: justify;
+        }
+
+        .note {
+            color: var(--neon-blue);
+            font-size: 13px;
+            font-weight: 600;
+            margin-top: 15px;
+        }
+
+
+        /* ==============================
+           10. SUMBER
+        ============================== */
+
+        .source {
+            margin-top: 35px;
+            padding: 25px;
+            border: 1px solid var(--border);
+            border-radius: 15px;
+            background: var(--glass);
+        }
+
+        .source h3 {
+            color: white;
+            font-size: 17px;
+            margin-bottom: 10px;
+        }
+
+        .source p {
+            color: var(--text-gray);
+            font-size: 13px;
+        }
+
+
+        /* ==============================
+           11. PENUTUP
+        ============================== */
+
+        .closing {
+            text-align: center;
+            color: var(--neon-blue);
+            font-size: 15px;
+            font-weight: 600;
+            margin: 45px 0 10px;
+        }
+
+
+        /* ==============================
+           12. FOOTER
+        ============================== */
+
+        footer {
+            text-align: center;
+            padding: 30px 20px;
+            color: #69777c;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            border-top: 1px solid var(--border);
+            margin-top: 40px;
+        }
+
+
+        /* ==============================
+           13. RESPONSIVE
+        ============================== */
+
+        @media (max-width: 700px) {
+            nav {
+                padding: 15px 20px;
+            }
+
+            .logo {
+                font-size: 19px;
+            }
+
+            .nav-links {
+                gap: 12px;
+            }
+
+            .nav-links a {
+                font-size: 10px;
+            }
+
+            .system-status {
+                display: none;
+            }
+
+            .materi {
+                padding: 0 18px 40px;
+            }
+
+            .hero {
+                min-height: 280px;
+            }
+
+            .intro,
+            .dzikir-card {
+                padding: 23px;
+            }
+
+            .dzikir-card h2 {
+                font-size: 18px;
+            }
+
+            .arabic {
+                font-size: 24px;
+                padding: 18px;
+            }
+        }
+
+    </style>
+
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">ISLAMI<span>CORE</span></div>
+		<li class="nav-item active"><a href="index.html">Beranda</a></li>
+        <div style="width: 150px; text-align: right;">
+            <small style="color: var(--neon-blue); font-size: 0.7rem; letter-spacing: 2px;">SYSTEM ACTIVE</small>
+        </div>
+    </nav>
+			
+			 <header class="hero">
+        <h1>DZIKIR SETELAH SHALAT</h1>
+        <p>Mengingat Allah dalam Setiap Keadaan</p>
+    </header>
+	
+    <!-- ==============================
+         16. ISI MATERI
+    ============================== -->
+
+    <main class="materi">
+
+        <div class="intro">
+            <p>
+                Dzikir setelah shalat merupakan amalan yang dilakukan
+                untuk mengingat Allah SWT setelah menunaikan ibadah
+                shalat. Melalui dzikir, seorang Muslim dapat memuji,
+                mengagungkan, dan memohon ampunan kepada Allah SWT.
+                Berikut beberapa bacaan dzikir setelah shalat beserta
+                arti dan faedahnya.
+            </p>
+        </div>
+
+
+        <!-- DZIKIR 1 -->
+
+        <section class="dzikir-card">
+
+            <span class="dzikir-number">DZIKIR 01</span>
+
+            <h2>Istighfar dan Doa Keselamatan</h2>
+
+            <div class="arabic" dir="rtl">
+                أَسْتَغْفِرُ اللهَ (3x)
+                <br><br>
+                اَللَّهُمَّ أَنْتَ السَّلاَمُ، وَمِنْكَ السَّلاَمُ،
+                تَبَارَكْتَ يَا ذَا الْجَلاَلِ وَاْلإِكْرَامِ
+            </div>
+
+            <p class="latin">
+                Astagh-firullah (3x).<br>
+                Allahumma antas salaam wa minkas salaam
+                tabaarokta yaa dzal jalaali wal ikrom.
+            </p>
+
+            <h3 class="subheading">Artinya:</h3>
+
+            <p class="meaning">
+                "Aku minta ampun kepada Allah," (3x).
+                <br><br>
+                "Ya Allah, Engkau pemberi keselamatan, dan dari-Mu
+                keselamatan, Maha Suci Engkau, wahai Tuhan Yang
+                Pemilik Keagungan dan Kemuliaan."
+            </p>
+
+            <div class="faedah">
+                <strong>Faedah:</strong>
+                Rasulullah shallallahu 'alaihi wa sallam jika selesai
+                dari shalatnya beliau beristighfar sebanyak tiga kali
+                dan membaca dzikir di atas. Al Auza'i menyatakan bahwa
+                bacaan istighfar adalah astaghfirullah, astaghfirullah.
+                <a href="https://rumaysho.com/1997-dzikir-setelah-shalat.html#_ftn1" target="_blank">[1]</a>
+            </div>
+
+        </section>
+
+
+        <!-- DZIKIR 2 -->
+
+        <section class="dzikir-card">
+
+            <span class="dzikir-number">DZIKIR 02</span>
+
+            <h2>Tahlil dan Doa Setelah Shalat</h2>
+
+            <div class="arabic" dir="rtl">
+                لاَ إِلَـهَ إِلاَّ اللهُ وَحْدَهُ لاَ شَرِيْكَ لَهُ،
+                لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ
+                شَيْءٍ قَدِيْرُ، اَللَّهُمَّ لاَ مَانِعَ لِمَا
+                أَعْطَيْتَ، وَلاَ مُعْطِيَ لِمَا مَنَعْتَ،
+                وَلاَ يَنْفَعُ ذَا الْجَدِّ مِنْكَ الْجَدُّ
+            </div>
+
+            <p class="latin">
+                Laa ilaha illallah wahdahu laa syarika lah,
+                lahul mulku wa lahul hamdu wa huwa 'ala kulli
+                syai-in qodiir.
+                <br><br>
+                Allahumma laa maani'a limaa a'thoyta wa laa
+                mu'thiya limaa mana'ta wa laa yanfa'u dzal
+                jaddi minkal jaddu.
+            </p>
+
+            <h3 class="subheading">Artinya:</h3>
+
+            <p class="meaning">
+                "Tiada Rabb yang berhak disembah selain Allah Yang
+                Maha Esa, tidak ada sekutu bagi-Nya. Bagi-Nya puji
+                dan bagi-Nya kerajaan. Dia Maha Kuasa atas segala
+                sesuatu. Ya Allah, tidak ada yang mencegah apa yang
+                Engkau berikan dan tidak ada yang memberi apa yang
+                Engkau cegah. Tidak berguna kekayaan dan kemuliaan
+                itu bagi pemiliknya (selain iman dan amal shalihnya
+                yang menyelamatkan dari siksaan). Hanya dari-Mu
+                kekayaan dan kemuliaan."
+            </p>
+
+            <div class="faedah">
+                <strong>Sumber bacaan:</strong>
+                <a href="https://rumaysho.com/1997-dzikir-setelah-shalat.html#_ftn2" target="_blank">[2]</a>
+            </div>
+
+        </section>
+
+
+        <!-- DZIKIR 3 -->
+
+        <section class="dzikir-card">
+
+            <span class="dzikir-number">DZIKIR 03</span>
+
+            <h2>Tahlil dan Pengakuan atas Keagungan Allah</h2>
+
+            <div class="arabic" dir="rtl">
+                لاَ إِلَـهَ إِلاَّ اللهُ وَحْدَهُ لاَ شَرِيْكَ لَهُ،
+                لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ
+                شَيْءٍ قَدِيْرُ.
+                لاَ حَوْلَ وَلاَ قُوَّةَ إِلاَّ بِاللهِ،
+                لاَ إِلَـهَ إِلاَّ اللهُ، وَلاَ نَعْبُدُ إِلاَّ
+                إِيَّاهُ، لَهُ النِّعْمَةُ وَلَهُ الْفَضْلُ
+                وَلَهُ الثَّنَاءُ الْحَسَنُ،
+                لاَ إِلَـهَ إِلاَّ اللهُ مُخْلِصِيْنَ لَهُ
+                الدِّيْنَ وَلَوْ كَرِهَ الْكَافِرُوْنَ
+            </div>
+
+            <p class="latin">
+                Laa ilaha illallah wahdahu laa syarika lah.
+                Lahul mulku wa lahul hamdu wa huwa 'ala kulli
+                syai-in qodiir.
+                <br><br>
+                Laa hawla wa laa quwwata illa billah.
+                Laa ilaha illallah wa laa na'budu illa iyyaah.
+                Lahun ni'mah wa lahul fadhlu wa lahuts tsanaaul hasan.
+                <br><br>
+                Laa ilaha illallah mukhlishiina lahud diin
+                wa law karihal kaafiruun.
+            </p>
+
+            <h3 class="subheading">Artinya:</h3>
+
+            <p class="meaning">
+                "Tiada Rabb (yang berhak disembah) kecuali Allah,
+                Yang Maha Esa, tidak ada sekutu bagi-Nya. Bagi-Nya
+                kerajaan dan pujaan. Dia Mahakuasa atas segala
+                sesuatu. Tidak ada daya dan kekuatan kecuali
+                (dengan pertolongan) Allah. Tiada Rabb (yang hak
+                disembah) kecuali Allah. Kami tidak menyembah
+                kecuali kepada-Nya. Bagi-Nya nikmat, anugerah dan
+                pujaan yang baik. Tiada Rabb (yang hak disembah)
+                kecuali Allah, dengan memurnikan ibadah kepada-Nya,
+                sekalipun orang-orang kafir sama benci."
+            </p>
+
+            <div class="faedah">
+                <strong>Faedah:</strong>
+                Dikatakan oleh 'Abdullah bin Zubair, Nabi
+                shallallahu 'alaihi wa sallam biasa membaca tahlil
+                (laa ilaha illallah) di akhir shalat.
+                <a href="https://rumaysho.com/1997-dzikir-setelah-shalat.html#_ftn4" target="_blank">[4]</a>
+            </div>
+
+        </section>
+
+
+        <!-- DZIKIR 4 -->
+
+        <section class="dzikir-card">
+
+            <span class="dzikir-number">DZIKIR 04</span>
+
+            <h2>Tasbih, Tahmid, dan Takbir</h2>
+
+            <div class="arabic" dir="rtl">
+                سُبْحَانَ اللهِ (33 ×)
+                <br><br>
+                اَلْحَمْدُ لِلَّهِ (33 ×)
+                <br><br>
+                اَللهُ أَكْبَرُ (33 ×)
+                <br><br>
+                لاَ إِلَـهَ إِلاَّ اللهُ وَحْدَهُ لاَ شَرِيْكَ لَهُ،
+                لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ
+                شَيْءٍ قَدِيْرُ
+            </div>
+
+            <p class="latin">
+                Subhanallah (33x).<br>
+                Al hamdulillah (33x).<br>
+                Allahu akbar (33x).
+                <br><br>
+                Laa ilaha illallah wahdahu laa syarika lah.
+                Lahul mulku wa lahul hamdu wa huwa 'ala kulli
+                syai-in qodiir.
+            </p>
+
+            <h3 class="subheading">Artinya:</h3>
+
+            <p class="meaning">
+                "Maha Suci Allah (33x), segala puji bagi Allah (33x),
+                Allah Maha Besar (33x). Tidak ada Rabb (yang berhak
+                disembah) kecuali Allah Yang Maha Esa, tidak ada
+                sekutu bagi-Nya. Bagi-Nya kerajaan. Bagi-Nya pujaan.
+                Dia-lah Yang Mahakuasa atas segala sesuatu."
+            </p>
+
+            <div class="faedah">
+                <strong>Faedah:</strong>
+                Siapa yang membaca dzikir di atas, maka dosa-dosanya
+                diampuni walau sebanyak buih di lautan.
+                <a href="https://rumaysho.com/1997-dzikir-setelah-shalat.html#_ftn5" target="_blank">[5]</a>
+                Kata Imam Nawawi rahimahullah, tekstual hadits
+                menunjukkan bahwa bacaan Subhanallah, Alhamdulillah,
+                Allahu akbar, masing-masing dibaca 33 kali secara
+                terpisah.
+                <a href="https://rumaysho.com/1997-dzikir-setelah-shalat.html#_ftn6" target="_blank">[6]</a>
+            </div>
+
+        </section>
+
+
+        <!-- DZIKIR 5 -->
+
+        <section class="dzikir-card">
+
+            <span class="dzikir-number">DZIKIR 05</span>
+
+            <h2>Membaca Ayat Kursi</h2>
+
+            <p class="simple-description">
+                Membaca Ayat Kursi setiap selesai shalat fardhu
+                merupakan salah satu amalan dzikir yang dianjurkan.
+            </p>
+
+            <div class="faedah">
+                <strong>Faedah:</strong>
+                Siapa membaca Ayat Kursi setiap selesai shalat,
+                tidak ada yang menghalanginya masuk surga selain
+                kematian.
+                <a href="https://rumaysho.com/1997-dzikir-setelah-shalat.html#_ftn7" target="_blank">[7]</a>
+            </div>
+
+        </section>
+
+
+        <!-- DZIKIR 6 -->
+
+        <section class="dzikir-card">
+
+            <span class="dzikir-number">DZIKIR 06</span>
+
+            <h2>Membaca Tiga Surah Pendek</h2>
+
+            <p class="simple-description">
+                Membaca Surah Al-Ikhlas, Al-Falaq, dan An-Naas
+                setiap selesai shalat fardhu.
+            </p>
+
+            <div class="faedah">
+                <strong>Faedah:</strong>
+                Tiga surat ini disebut mu'awwidzot.
+                <a href="https://rumaysho.com/1997-dzikir-setelah-shalat.html#_ftn8" target="_blank">[8]</a>
+            </div>
+
+        </section>
+
+
+        <!-- DZIKIR 7 -->
+
+        <section class="dzikir-card">
+
+            <span class="dzikir-number">DZIKIR 07</span>
+
+            <h2>Doa Memohon Ilmu dan Rezeki yang Baik</h2>
+
+            <div class="arabic" dir="rtl">
+                اَللَّهُمَّ إِنِّيْ أَسْأَلُكَ عِلْمًا نَافِعًا،
+                وَرِزْقًا طَيِّبًا، وَعَمَلاً مُتَقَبَّلاً
+            </div>
+
+            <p class="latin">
+                Allahumma inni as-aluka 'ilman naafi'a,
+                wa rizqon thoyyiba, wa 'amalan mutaqobbala.
+            </p>
+
+            <h3 class="subheading">Artinya:</h3>
+
+            <p class="meaning">
+                "Ya Allah, sungguh aku memohon kepada-Mu ilmu yang
+                bermanfaat (bagi diriku dan orang lain), rezeki yang
+                halal dan amal yang diterima (di sisi-Mu dan
+                mendapatkan ganjaran yang baik)."
+            </p>
+
+            <div class="faedah">
+                <strong>Keterangan:</strong>
+                Dibaca setelah salam dari shalat Subuh.
+                <a href="https://rumaysho.com/1997-dzikir-setelah-shalat.html#_ftn9" target="_blank">[9]</a>
+            </div>
+
+        </section>
+
+
+        <!-- SUMBER REFERENSI -->
+
+        <div class="source">
+            <h3>Sumber Referensi</h3>
+
+            <p>
+                Materi dzikir setelah shalat merujuk pada artikel:
+                <a href="https://rumaysho.com/1997-dzikir-setelah-shalat.html"
+                   target="_blank">
+                    Dzikir Setelah Shalat - Rumaysho
+                </a>.
+            </p>
+        </div>
+
+
+        <!-- PENUTUP -->
+
+        <div class="closing">
+            Semoga bisa diamalkan.
+        </div>
+
+    </main>
+
+
+    <!-- ==============================
+         17. FOOTER
+    ============================== -->
+
+    <footer>
+        ISLAMIC VALUES IN DIGITAL GENERATION
+    </footer>
+
+
+</body>
+</html>
+	
